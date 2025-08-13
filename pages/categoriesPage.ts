@@ -30,5 +30,6 @@ export class categoriesPage {
         await this.page.getByRole('button', { name: 'Aceptar' }).click();
         await this.page.waitForTimeout(2000);
         await expect(this.page.getByText(subCategoryName)).toBeVisible();
+        await expect(this.page.locator('')).toBeVisible();
     }
 }
