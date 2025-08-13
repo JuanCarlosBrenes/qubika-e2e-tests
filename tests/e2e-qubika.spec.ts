@@ -3,6 +3,7 @@ import { generateRandomEmail, defaultPassword, userRole } from '../utils/generat
 import { loginPage } from '../pages/LoginPage';
 import { dashboardPage } from '../pages/DashboardPage';
 import { categoriesPage } from '../pages/CategoriesPage';
+import { Console } from 'console';
 
 let apiContext: APIRequestContext;
 
@@ -40,5 +41,9 @@ test.describe('End-to-End: Qubika Sports Club Management', () => {
 
     const subCategoryName = `Sub-${Date.now()}`;
     await CategoriesPage.addSubCategory(categoryName, subCategoryName);
+  });
+
+  test('Test de ejemplo para git.', async ({ page }) => {
+    console.log('Test que da cambios para git.');
   });
 });
