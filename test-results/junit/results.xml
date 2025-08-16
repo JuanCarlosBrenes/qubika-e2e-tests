@@ -1,0 +1,61 @@
+<testsuites id="" name="" tests="3" failures="1" skipped="0" errors="0" time="21.438502999999997">
+<testsuite name="e2e-qubika.spec.ts" timestamp="2025-08-16T03:14:05.970Z" hostname="chromium" tests="3" failures="1" skipped="0" time="17.184" errors="0">
+<testcase name="End-to-End: Qubika Sports Club Management › Complete E2E flow using API and UI" classname="e2e-qubika.spec.ts" time="16.817">
+<failure message="e2e-qubika.spec.ts:28:7 Complete E2E flow using API and UI" type="FAILURE">
+<![CDATA[  [chromium] › e2e-qubika.spec.ts:28:7 › End-to-End: Qubika Sports Club Management › Complete E2E flow using API and UI 
+
+    Error: Timed out 5000ms waiting for expect(locator).toBeVisible()
+
+    Locator: 
+    Expected: visible
+    Received: <element(s) not found>
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+
+
+       at ..\pages\categoriesPage.ts:33
+
+      31 |         await this.page.waitForTimeout(2000);
+      32 |         await expect(this.page.getByText(subCategoryName)).toBeVisible();
+    > 33 |         await expect(this.page.locator('')).toBeVisible();
+         |                                             ^
+      34 |     }
+      35 | }
+        at categoriesPage.addSubCategory (C:\Users\juanc\playwright-ts-project\pages\categoriesPage.ts:33:45)
+        at C:\Users\juanc\playwright-ts-project\tests\e2e-qubika.spec.ts:43:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\e2e-qubika-End-to-End-Qubi-5386a-e-E2E-flow-using-API-and-UI-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\e2e-qubika-End-to-End-Qubi-5386a-e-E2E-flow-using-API-and-UI-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\e2e-qubika-End-to-End-Qubi-5386a-e-E2E-flow-using-API-and-UI-chromium\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\e2e-qubika-End-to-End-Qubi-5386a-e-E2E-flow-using-API-and-UI-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|..\e2e-qubika-End-to-End-Qubi-5386a-e-E2E-flow-using-API-and-UI-chromium\video.webm]]
+
+[[ATTACHMENT|..\e2e-qubika-End-to-End-Qubi-5386a-e-E2E-flow-using-API-and-UI-chromium\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="End-to-End: Qubika Sports Club Management › Test de ejemplo para git." classname="e2e-qubika.spec.ts" time="0.226">
+<system-out>
+<![CDATA[Test que da cambios para git.
+]]>
+</system-out>
+</testcase>
+<testcase name="End-to-End: Qubika Sports Club Management › Test de ejemplo para git DESPUES DEL CI PIPELINE." classname="e2e-qubika.spec.ts" time="0.141">
+<system-out>
+<![CDATA[Test que da cambios para el CI PIPELINE.
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>
