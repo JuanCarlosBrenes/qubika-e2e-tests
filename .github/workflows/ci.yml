@@ -1,94 +1,29 @@
-name: CI - Playwright
+name: Minimal Playwright CI
 
-# 1) CUÁNDO SE EJECUTA
 on:
   push:
-    branches: [ "**" ]         # todos los branches
-    paths-ignore:              # evita disparar por cambios irrelevantes
-      - "README.md"
-      - "docs/**"
-      - ".vscode/**"
+    branches: ['**']
   pull_request:
-    branches: [ "**" ]
-
-# 2) CANCELA EJECUCIONES VIEJAS DEL MISMO BRANCH (ahorra minutos)
-concurrency:
-  group: ci-${{ github.ref }}
-  cancel-in-progress: true
-
-# 3) PERMISOS MÍNIMOS (buenas prácticas)
-permissions:
-  contents: read
+    branches: ['**']
 
 jobs:
-  e2e:
-    name: E2E on ${{ matrix.os }} / Node ${{ matrix.node }}
-    runs-on: ${{ matrix.os }}
+  test:
+    runs-on: ubuntu-latest
 
-    # 4) MATRIZ (opcional): ejecuta en varias versiones de Node/OS
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ ubuntu-latest ]       # agrega 'windows-latest', 'macos-latest' si querés
-        node: [ 20 ]              # podés agregar 18, 22 si te interesa compatibilidad
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
 
- steps:
-      # 5) CHECKOUT DEL CÓDIGO
-      - name: Checkout
-        uses: actions/checkout@v4
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
 
-      # 6) CONFIGURA NODE + CACHÉ DE npm
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node }}
-          cache: 'npm'
-          cache-dependency-path: |
-            package-lock.json
-            **/package-lock.json
+    - name: Install dependencies
+      run: npm ci
 
-      # 7) INSTALA DEPENDENCIAS LIMPIO
-      - name: Install dependencies
-        run: npm ci
+    - name: Install Playwright browsers
+      run: npx playwright install --with-deps
 
-      # 8) INSTALA NAVEGADORES Y DEPENDENCIAS DEL SISTEMA
-      #    --with-deps es CLAVE en Linux para Chromium (librerías del SO)
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-
-      # 9) (OPCIONAL) LINTER/BUILD SI TU PROYECTO LO REQUIERE
-      - name: Lint
-        run: npm run lint --if-present
-      - name: Build
-        run: npm run build --if-present
-
-      # 10) CORRE TESTS EN MODO CI
-      - name: Run Playwright tests
-        run: npm run test:ci
-
-      # 11) GUARDA REPORTES/JUNIT/TRACE/VIDEOS COMO ARTEFACTO
-      - name: Upload HTML report
-        if: always()    # sube incluso si fallan tests
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-html-report
-          path: playwright-report
-          retention-days: 7
-
-      - name: Upload JUnit results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: junit-results
-          path: test-results/junit/results.xml
-          retention-days: 7
-
-      # 12) (OPCIONAL) PUBLICA RESUMEN BONITO EN LA EJECUCIÓN
-      - name: Summary
-        if: always()
-        run: |
-          echo "## Resultados de Playwright" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- Sistema: ${{ matrix.os }}" >> $GITHUB_STEP_SUMMARY
-          echo "- Node: ${{ matrix.node }}" >> $GITHUB_STEP_SUMMARY
-          echo "- Reporte HTML adjunto como artefacto." >> $GITHUB_STEP_SUMMARY
+    - name: Run Playwright tests
+      run: npx playwright test
