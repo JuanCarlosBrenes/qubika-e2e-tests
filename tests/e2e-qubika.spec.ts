@@ -1,8 +1,8 @@
 import { test, expect, request, APIRequestContext } from '@playwright/test';
 import { generateRandomEmail, defaultPassword, userRole } from '../utils/generateUser';
-import { loginPage } from '../pages/LoginPage';
-import { dashboardPage } from '../pages/DashboardPage';
-import { categoriesPage } from '../pages/CategoriesPage';
+import { loginPage } from '../pages/loginPage';
+import { dashboardPage } from '../pages/dashboardPage';
+import { categoriesPage } from '../pages/categoriesPage';
 import { Console } from 'console';
 
 let apiContext: APIRequestContext;
