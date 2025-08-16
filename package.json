@@ -18,8 +18,7 @@
   },
   "dependencies": {
     "uuid": "^11.1.0",
-    "@types/junit": "^...",
-    "junit": "^..."
+    "junit": "^1.0.0"
   },
   "scripts": {
     "test": "playwright test",
