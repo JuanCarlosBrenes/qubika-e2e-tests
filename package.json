@@ -17,6 +17,14 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "@types/junit": "^...",
+    "junit": "^..."
+  },
+  "scripts": {
+    "test": "playwright test",
+    "test:ci": "playwright test --reporter=dot",
+    "lint": "eslint .",
+    "build": "tsc -p ."
   }
 }
