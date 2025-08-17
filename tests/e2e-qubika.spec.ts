@@ -50,4 +50,8 @@ test.describe('End-to-End: Qubika Sports Club Management', () => {
    test('Test de ejemplo para git DESPUES DEL CI PIPELINE.', async ({ page }) => {
     console.log('Test que da cambios para el CI PIPELINE.');
   });
+
+  test('Test como la reputa madre que la recontyra mil pario.', async ({ page }) => {
+    console.log('ya sirvio esta picha.');
+  });
 });
